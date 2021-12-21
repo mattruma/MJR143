@@ -60,4 +60,4 @@ jobs:
           with:
             app-name: ${{secrets.MJR143001APP_AZURE_WEBAPP_NAME }}
             publish-profile: ${{ secrets.MJR143001APP_AZURE_WEBAPP_PUBLISH_PROFILE }}
-            package: ./src/WebApplication1/publish
+            package: ${{env.DOTNET_ROOT}}/publish
