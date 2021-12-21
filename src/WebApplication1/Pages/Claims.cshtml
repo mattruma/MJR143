@@ -1,0 +1,23 @@
+﻿@page
+@using System.Security.Claims
+@model ClaimsModel
+@{
+    ViewData["Title"] = "Claims page";
+}
+
+<h1>Claims</h1>
+
+<table class="table">
+	<tr>
+		<th>Claim Type</th>
+		<th>Claim Value</th>
+	</tr>
+
+	@foreach (Claim claim in this.User.Claims)
+	{
+		<tr>
+			<td><code>@claim.Type</code></td>
+			<td>@claim.Value</td>
+		</tr>
+	}
+</table>
