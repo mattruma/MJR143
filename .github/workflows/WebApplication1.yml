@@ -40,3 +40,24 @@ jobs:
         with:
           name: .net-app
           path: ${{env.DOTNET_ROOT}}/publish
+          
+  deploy:
+      runs-on: ubuntu-latest
+      needs: build
+      environment:
+        name: 'Development'
+        url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
+
+      steps:
+        - name: Download artifact from build job
+          uses: actions/download-artifact@v2
+          with:
+            name: .net-app
+
+        - name: Deploy to Azure Web App
+          id: deploy-to-webapp
+          uses: azure/webapps-deploy@v2
+          with:
+            app-name: ${{secrets.MJR143001APP_AZURE_WEBAPP_NAME }}
+            publish-profile: ${{ secrets.MJR143001APP_AZURE_WEBAPP_PUBLISH_PROFILE }}
+            package: ./src/WebApplication1/publish
