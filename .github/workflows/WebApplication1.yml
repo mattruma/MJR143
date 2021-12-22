@@ -58,3 +58,9 @@ jobs:
             app-name: ${{secrets.MJR143001APP_AZURE_WEBAPP_NAME }}
             publish-profile: ${{ secrets.MJR143001APP_AZURE_WEBAPP_PUBLISH_PROFILE }}
             package: WebApplication1
+            
+        - name: Update app settings
+          uses: azure/appservice-settings@v1
+          with:
+            app-name: ${{secrets.MJR143001APP_AZURE_WEBAPP_NAME }}
+            app-settings-json: '[{ "name": "AzureAdB2C:Instance", "value": "${{ secrets.AZUREADB2C_INSTANCE }}", "slotSetting": false }]'
