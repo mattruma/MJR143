@@ -22,7 +22,7 @@ jobs:
           dotnet-version: ${{ env.DOTNET_VERSION }}
       
       - name: Restore dependencies
-        run: dotnet restore
+        run: dotnet restore ./src/WebApplication1/WebApplication1.csproj
       
       - name: Build with dotnet
         run: dotnet build ./src/WebApplication1/WebApplication1.csproj --configuration Release
