@@ -51,34 +51,47 @@ jobs:
             name: WebApplication1
             path: WebApplication1
 
-        - name: Deploy app
+        - name: MJR143001APP Deploy app 
           uses: azure/webapps-deploy@v2
           with:
             app-name: ${{secrets.MJR143001APP_AZURE_WEBAPP_NAME }}
             publish-profile: ${{ secrets.MJR143001APP_AZURE_WEBAPP_PUBLISH_PROFILE }}
             package: WebApplication1
 
-        - name: Deploy app
+        - name: MJR143002APP Deploy app 
           uses: azure/webapps-deploy@v2
           with:
             app-name: ${{secrets.MJR143002APP_AZURE_WEBAPP_NAME }}
             publish-profile: ${{ secrets.MJR143002APP_AZURE_WEBAPP_PUBLISH_PROFILE }}
+            package: WebApplication1
+
+        - name: MJR143003APP Deploy app 
+          uses: azure/webapps-deploy@v2
+          with:
+            app-name: ${{secrets.MJR143003APP_AZURE_WEBAPP_NAME }}
+            publish-profile: ${{ secrets.MJR143003APP_AZURE_WEBAPP_PUBLISH_PROFILE }}
             package: WebApplication1
         
         - uses: azure/login@v1
           with:
             creds: '${{ secrets.AZURE_CREDENTIALS }}'
         
-        - name: Update app settings
+        - name: MJR143001APP Update app settings 
           uses: azure/appservice-settings@v1
           with:
             app-name: ${{ secrets.MJR143001APP_AZURE_WEBAPP_NAME }}
             app-settings-json: '[{ "name": "SiteTitle", "value": "${{ secrets.MJR143001APP_AZURE_WEBAPP_NAME }}", "slotSetting": false }, { "name": "AzureAdB2C:Instance", "value": "${{ secrets.AZUREADB2C_INSTANCE }}", "slotSetting": false },{ "name": "AzureAdB2C:Domain", "value": "${{ secrets.AZUREADB2C_DOMAIN }}", "slotSetting": false },{ "name": "AzureAdB2C:ClientId", "value": "${{ secrets.MJR143001APP_AZUREADB2C_CLIENTID }}", "slotSetting": false },{ "name": "AzureAdB2C:SignedOutCallbackPath", "value": "${{ secrets.AZUREADB2C_SIGNEDOUTCALLBACKPATH }}", "slotSetting": false },{ "name": "AzureAdB2C:SignUpSignInPolicyId", "value": "${{ secrets.AZUREADB2C_SIGNUPSIGNINPOLICYID }}", "slotSetting": false }]'
             
-        - name: Update app settings
+        - name: MJR143002APP Update app settings 
           uses: azure/appservice-settings@v1
           with:
             app-name: ${{ secrets.MJR143002APP_AZURE_WEBAPP_NAME }}
             app-settings-json: '[{ "name": "SiteTitle", "value": "${{ secrets.MJR143002APP_AZURE_WEBAPP_NAME }}", "slotSetting": false }, { "name": "AzureAdB2C:Instance", "value": "${{ secrets.AZUREADB2C_INSTANCE }}", "slotSetting": false },{ "name": "AzureAdB2C:Domain", "value": "${{ secrets.AZUREADB2C_DOMAIN }}", "slotSetting": false },{ "name": "AzureAdB2C:ClientId", "value": "${{ secrets.MJR143002APP_AZUREADB2C_CLIENTID }}", "slotSetting": false },{ "name": "AzureAdB2C:SignedOutCallbackPath", "value": "${{ secrets.AZUREADB2C_SIGNEDOUTCALLBACKPATH }}", "slotSetting": false },{ "name": "AzureAdB2C:SignUpSignInPolicyId", "value": "${{ secrets.MJR143002APP_AZUREADB2C_SIGNUPSIGNINPOLICYID }}", "slotSetting": false }]'
-        
+           
+        - name: MJR143003APP Update app settings 
+          uses: azure/appservice-settings@v1
+          with:
+            app-name: ${{ secrets.MJR143003APP_AZURE_WEBAPP_NAME }}
+            app-settings-json: '[{ "name": "SiteTitle", "value": "${{ secrets.MJR143003APP_AZURE_WEBAPP_NAME }}", "slotSetting": false }, { "name": "AzureAdB2C:Instance", "value": "${{ secrets.AZUREADB2C_INSTANCE }}", "slotSetting": false },{ "name": "AzureAdB2C:Domain", "value": "${{ secrets.AZUREADB2C_DOMAIN }}", "slotSetting": false },{ "name": "AzureAdB2C:ClientId", "value": "${{ secrets.MJR143003APP_AZUREADB2C_CLIENTID }}", "slotSetting": false },{ "name": "AzureAdB2C:SignedOutCallbackPath", "value": "${{ secrets.AZUREADB2C_SIGNEDOUTCALLBACKPATH }}", "slotSetting": false },{ "name": "AzureAdB2C:SignUpSignInPolicyId", "value": "${{ secrets.AZUREADB2C_SIGNUPSIGNINPOLICYID }}", "slotSetting": false }]'
+     
         - run: az logout
